@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1 Деталі екземпляра книги
+
+  p
+    strong Назва книги:
+    a(href=bookinstance.book.url) #{bookinstance.book.title}
+
+  p
+    strong Відбиток:
+    | #{bookinstance.imprint}
+
+  p
+    strong Статус:
+    if bookinstance.status == 'Available'
+      span.text-success #{bookinstance.status}
+    else if bookinstance.status == 'Maintenance'
+      span.text-danger #{bookinstance.status}
+    else
+      span.text-warning #{bookinstance.status}
+
+  if bookinstance.status != 'Available'
+    p
+      strong Дата повернення:
+      | #{bookinstance.due_back ? bookinstance.due_back.toDateString() : 'Немає дати'}
+
+  p
+    strong Ідентифікатор:
+    | #{bookinstance._id}
+
+  hr
+  p
+    a(href=bookinstance.url + '/update') Оновити екземпляр |
+    a(href=bookinstance.url + '/delete') Видалити екземпляр

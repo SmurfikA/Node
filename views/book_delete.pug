@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  h1 #{title}: #{book.title}
+  p Автор: #{book.author.name}
+
+  if book_instances.length
+    p #[strong Спочатку видаліть наступні екземпляри книги.]
+    ul
+      each instance in book_instances
+        li= instance.imprint + ' (' + instance.status + ')'
+  else
+    p Ви дійсно хочете видалити цю книгу?
+
+    form(method='POST')
+      input(type='hidden', name='bookid', value=book._id)
+      button.btn.btn-danger(type='submit') Видалити

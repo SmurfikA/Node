@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 #{title}: #{genre.name}
+
+  if genre_books.length
+    p #[strong Спершу видаліть наступні книги, пов’язані з цим жанром.]
+    ul
+      each book in genre_books
+        li #{book.title}
+  else
+    p Ви дійсно хочете видалити жанр "#{genre.name}"?
+
+    form(method='POST')
+      input(type='hidden', name='genreid', value=genre._id)
+      button.btn.btn-danger(type='submit') Видалити

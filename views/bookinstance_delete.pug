@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1 #{title}
+
+  p Ви впевнені, що хочете видалити наступний екземпляр книги?
+  p
+    strong Книга: 
+    | #{bookinstance.book.title}
+  p
+    strong Ідентифікатор: 
+    | #{bookinstance._id}
+
+  form(method='POST')
+    input(type='hidden', name='bookinstanceid', value=bookinstance._id)
+    button.btn.btn-danger(type='submit') Видалити
