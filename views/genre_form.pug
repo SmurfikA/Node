@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  h1= title
+
+  form(method="POST" action="")
+    div.form-group
+      label(for="name") Назва жанру:
+      input#name.form-control(type="text", name="name", required=true, value=(typeof genre != 'undefined' ? genre.name : ''))
+
+    button.btn.btn-primary(type="submit") Зберегти жанр
+
+  if errors
+    ul.text-danger
+      each error in errors
+        li= error.msg
